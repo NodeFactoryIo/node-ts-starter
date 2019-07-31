@@ -1,14 +1,17 @@
-import app from "./App";
-import config from "./Config/Config";
+import cleanup, {uninstall} from "node-cleanup";
+import {App} from "./App";
 import database from "./Services/Database";
 import logger from "./Services/Logger";
 
-database.init().then(() => {
-    app.listen(config.port, (err) => {
-        if (err) {
-            return logger.error(err);
-        }
+const app = new App();
 
-        return logger.info(`Server is listening on ${config.port}`);
-    });
+database.init().then(() => {
+    app.start();
+});
+
+cleanup( () => {
+    logger.info("Shutting down gracefully");
+    app.stop();
+    uninstall();
+    return true;
 });

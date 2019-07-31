@@ -1,8 +1,15 @@
 import * as express from "express";
-import HelpController from "../Controller/Api/HelpController";
+import {HelpController} from "../Controller/Api/HelpController";
 
-const router = express.Router();
+export function createApiRoutes(
+    helpController: HelpController,
+): express.Router {
+    const router = express.Router();
 
-router.get("/help", HelpController.getHelp);
+    router.get(
+        "/help",
+        // validate(schema)
+        helpController.getHelp.bind(helpController));
 
-export default router;
+    return router;
+}
