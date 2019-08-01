@@ -22,9 +22,6 @@ export class App implements IService {
         this.express = express();
         // add before route middleware's here
         this.express.use(morgan("short", { stream: morganLogger }));
-        // this.express.use(bodyParser.urlencoded({
-        //     extended: true,
-        // }));
         this.express.use(bodyParser.json());
         this.express.use(helmet());
         // add after route middleware's here
