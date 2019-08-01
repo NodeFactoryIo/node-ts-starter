@@ -1,19 +1,19 @@
 import path from "path";
-import {Sequelize} from "sequelize-typescript";
+import {DataTypes, InitOptions, ModelAttributes, Options, Sequelize} from "sequelize";
 import Umzug from "umzug";
-// import {Umzug} from "umzug";
 import config from "../Config/Config";
+import Example from "../Models/Example";
 import logger from "../Services/Logger";
 
 class Database {
 
     public sequelize: Sequelize;
 
-    private migrations: Umzug.Umzug;
+    private migrations: Umzug;
 
     constructor() {
         this.sequelize = new Sequelize(
-           {
+            {
                 database: config.db.database,
                 username: config.db.user,
                 password: config.db.password,
@@ -27,8 +27,10 @@ class Database {
                     max: 5,
                     min: 0,
                 },
-               modelPaths: [path.join(__dirname, "../Models")],
-            });
+                modelPaths: [path.join(__dirname, "../Models")],
+            } as Options,
+        );
+        this.initModels();
         this.migrations = new Umzug({
             storage: "sequelize",
 
@@ -83,6 +85,19 @@ class Database {
         return new Promise((resolve) => {
             setTimeout(resolve, ms);
         });
+    }
+
+    private initModels() {
+        Example.init({
+            help: {
+                type: DataTypes.STRING(128),
+                allowNull: true,
+            },
+        } as ModelAttributes,
+        {
+            sequelize: this.sequelize,
+            tableName: "Examples",
+        } as InitOptions);
     }
 }
 
