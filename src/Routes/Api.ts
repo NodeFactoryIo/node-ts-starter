@@ -1,4 +1,4 @@
-import * as express from "express";
+import express from "express";
 import {HelpController} from "../Controller/Api/HelpController";
 
 export function createApiRoutes(

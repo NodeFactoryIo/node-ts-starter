@@ -1,9 +1,10 @@
-import * as bodyParser from "body-parser";
+import bodyParser from "body-parser";
 import express = require("express");
 import {Express, Request, Response, Router} from "express";
-import * as helmet from "helmet";
+import helmet from "helmet";
 import http from "http";
-import * as morgan from "morgan";
+import morgan from "morgan";
+
 import config from "./Config/Config";
 import {HelpController} from "./Controller/Api/HelpController";
 import {createApiRoutes} from "./Routes/Api";
@@ -21,7 +22,10 @@ export class App implements IService {
         this.express = express();
         // add before route middleware's here
         this.express.use(morgan("short", { stream: morganLogger }));
-        this.express.use(bodyParser());
+        // this.express.use(bodyParser.urlencoded({
+        //     extended: true,
+        // }));
+        this.express.use(bodyParser.json());
         this.express.use(helmet());
         // add after route middleware's here
         this.addInitialRoutes();

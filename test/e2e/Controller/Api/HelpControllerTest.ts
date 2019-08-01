@@ -7,7 +7,7 @@ describe("Help endpoint test", async () => {
 
     it("Assert help is returned", () => {
         request(app.server)
-            .get("/health")
+            .get("/api/help")
             .expect(200)
             .end((err, res) => {
                 expect(err).not.to.be.an("error", "No error");
