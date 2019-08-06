@@ -4,7 +4,11 @@
     "max-line-length": {
       "options": [120]
     },
-    "object-literal-sort-keys": false
+    "object-literal-sort-keys": false,
+    "only-arrow-functions": false,
+    "no-namespace": false,
+    "no-unused-expression": false,
+    "interface-over-type-literal": false
   },
   "jsRules": {
     "max-line-length": {

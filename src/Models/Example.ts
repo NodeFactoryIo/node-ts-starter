@@ -1,14 +1,5 @@
-import {Column, DataType, Model, Table} from "sequelize-typescript";
+import {DataType, Model} from "sequelize";
 
-@Table({
-    timestamps: true,
-    tableName: "Examples",
-})
-export default class Example extends Model<Example> {
-
-    @Column({
-        type: DataType.STRING,
-    })
+export default class Example extends Model {
     public help: string;
-
 }

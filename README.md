@@ -21,11 +21,14 @@ Following software is required to be installed to use this repo:
 
 ## Usage
 
-On first use of this repo, run `npx run build` which will
-build docker image.You will have to run `npx run build` each time
+Make sure to run `yarn install` before first build or 
+each time you change dependencies in package.json.
+
+On first use of this repo, run `npx task build` which will
+build docker image.You will have to run `npx task build` each time
 you change dependencies in package.json (yarn.lock).
 
-Run `npx run` to see all available commands and their description.
+Run `npx task --help` to see all available commands and their description.
 
 ## Notice
 * make sure you update yarn.lock before building
