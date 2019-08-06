@@ -35,7 +35,7 @@
     "express-validation": "^1.0.2",
     "helmet": "^3.18.0",
     "joi": "^13.5.2",
-    "morgan": "^1.9.0",
+    "morgan": "^1.9.1",
     "nodemon": "^1.17.4",
     "pg": "^7.4.3",
     "reflect-metadata": "^0.1.12",
