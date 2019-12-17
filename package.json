@@ -22,7 +22,7 @@
     "test:e2e": "SERVER_PORT=0 mocha --timeout 30000 -r ts-node/register -r dotenv/config \"test/e2e/**/*.ts\"",
     "coverage": "nyc --reporter=text --all --include \"src/**/*.js\" npm test",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
-    "lint": "tslint src/**/*.ts",
+    "lint": "eslint --color --ext .ts src/",
     "start": "node --inspect=0.0.0.0:56745 -r ts-node/register -r dotenv/config src/index.ts",
     "dev": "./node_modules/nodemon/bin/nodemon.js",
     "task": "ts-node ./tasksfile.ts"
@@ -50,9 +50,12 @@
     "@types/node": "^12.0.12",
     "@types/sinon": "^7.0.13",
     "@types/supertest": "^2.0.5",
+    "@typescript-eslint/eslint-plugin": "^2.12.0",
+    "@typescript-eslint/parser": "^2.12.0",
     "chai": "^4.2.0",
     "coveralls": "^3.0.2",
     "dotenv": "^5.0.1",
+    "eslint": "^6.7.2",
     "mocha": "^6.1.4",
     "nyc": "^12.0.2",
     "runjs": "^4.3.2",
@@ -61,8 +64,7 @@
     "supertest": "^3.1.0",
     "tap-spec": "^5.0.0",
     "tasksfile": "^5.1.0",
-    "ts-node": "^8.3.0",
-    "tslint": "^5.18.0",
+    "ts-node": "^8.5.4",
     "typescript": "^3.7.3",
     "typescript-eslint-parser": "^18.0.0"
   }

@@ -6,11 +6,11 @@ function clean() {
     sh("rm -rf build");
 }
 
-function lint() {
-    sh("docker-compose run --rm backend npm run lint", {async: false, nopipe: true});
+function lint(options: any, argument: string = "") {
+    sh(`docker-compose run --rm backend npm run lint ${argument}`, {async: false, nopipe: true});
 }
 
-function npm(options, task = "--help") {
+function npm(options: any, task = "--help") {
     sh("docker-compose run --rm backend npm run " + task, {async: false, nopipe: true});
 }
 

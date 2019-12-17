@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import {Request, Response} from "express";
 
 export class HelpController {
     public getHelp(req: Request, res: Response): void {

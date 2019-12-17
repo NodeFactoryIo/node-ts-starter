@@ -14,7 +14,7 @@ export const validate = (schema) => {
         if (errors.length === 0) {
             next();
         } else {
-            res.status(400).json({ errors });
+            res.status(400).json({errors});
         }
     };
 };
