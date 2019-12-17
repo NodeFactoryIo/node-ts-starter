@@ -9,7 +9,7 @@ jobs:
     - run: chown -R $USER:$USER ~/app
     - restore_cache:
         keys:
-        - v1-docker-{{ .Branch }}
+        - v2-docker-{{ .Branch }}
     - run:
         name: Load Docker layers cache
         command: |
@@ -43,10 +43,10 @@ jobs:
     - run:
         name: Save docker layers cache
         command: |
-          docker save -o ~/docker-layers.tar node:carbon-alpine
+          docker save -o ~/docker-layers.tar node:12.13-alpine
           docker save -o ./image.tar nodefactory/nodejs-ts-starter:latest
     - save_cache:
-        key: v1-docker-{{ .Branch }}-{{ epoch }}
+        key: v2-docker-{{ .Branch }}-{{ epoch }}
         paths:
         - ~/docker-layers.tar
     - persist_to_workspace:
