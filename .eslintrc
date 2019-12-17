@@ -14,8 +14,8 @@
   ],
   "rules": {
     "@typescript-eslint/no-require-imports": "error",
-    "@typescript-eslint/ban-ts-ignore": "off",
-    "@typescript-eslint/no-unused-vars": ["warn", {
+    "@typescript-eslint/ban-ts-ignore": "warn",
+    "@typescript-eslint/no-unused-vars": ["error", {
       "varsIgnorePattern": "^_"
     }],
     "max-len": ["error", {

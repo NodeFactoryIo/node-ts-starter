@@ -20,7 +20,7 @@
     "test:unit": "NODE_ENV=test mocha -r dotenv/config -r ts-node/register \"test/unit/**/*.ts\"",
     "test": "yarn run test:unit & yarn run test:e2e",
     "test:e2e": "SERVER_PORT=0 mocha --timeout 30000 -r ts-node/register -r dotenv/config \"test/e2e/**/*.ts\"",
-    "coverage": "nyc --reporter=text --all --include \"src/**/*.js\" yarn test",
+    "coverage": "nyc --reporter=text --all --include \"src/**/*.js\" yarn test:unit",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "lint": "eslint --color --ext .ts src/ && tsc --noEmit",
     "start": "node --inspect=0.0.0.0:56745 -r ts-node/register -r dotenv/config src/index.ts",
