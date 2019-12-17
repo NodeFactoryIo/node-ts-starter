@@ -43,7 +43,7 @@ jobs:
     - run:
         name: Save docker layers cache
         command: |
-          docker save -o ~/docker-layers.tar node:carbon-alpine
+          docker save -o ~/docker-layers.tar node:12.13-alpine
           docker save -o ./image.tar nodefactory/nodejs-ts-starter:latest
     - save_cache:
         key: v2-docker-{{ .Branch }}-{{ epoch }}
