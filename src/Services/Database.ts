@@ -1,6 +1,7 @@
 import path from "path";
 import {DataTypes, InitOptions, ModelAttributes, Options, Sequelize} from "sequelize";
 import Umzug from "umzug";
+import { Umzug as UmzugInterface } from "umzug";
 import config from "../Config/Config";
 import Example from "../Models/Example";
 import logger from "../Services/Logger";
@@ -9,7 +10,7 @@ class Database {
 
     public sequelize: Sequelize;
 
-    private migrations: Umzug;
+    private migrations: UmzugInterface;
 
     constructor() {
         this.sequelize = new Sequelize(
@@ -80,7 +81,7 @@ class Database {
         }
     }
 
-    private sleep(ms): Promise<void> {
+    private sleep(ms: number): Promise<void> {
         return new Promise((resolve) => {
             setTimeout(resolve, ms);
         });

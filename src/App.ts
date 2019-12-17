@@ -1,6 +1,6 @@
 import bodyParser from "body-parser";
 import express from "express";
-import {Express, Request, Response, Router} from "express";
+import {Application, Request, Response, Router} from "express";
 import helmet from "helmet";
 import http from "http";
 import morgan from "morgan";
@@ -13,16 +13,18 @@ import logger, {morganLogger} from "./Services/Logger";
 
 export class App implements Service {
 
-    public express: Express;
-    public server: http.Server;
+    public express: Application;
+    public server?: http.Server;
 
-    private helpController: HelpController;
+    private helpController?: HelpController;
 
     constructor() {
         this.express = express();
         // add before route middleware's here
+        // @ts-ignore-next-line
         this.express.use(morgan("short", {stream: morganLogger}));
         this.express.use(bodyParser.json());
+        // @ts-ignore-next-line
         this.express.use(helmet());
         // add after route middleware's here
         this.addInitialRoutes();
@@ -41,7 +43,9 @@ export class App implements Service {
 
     public async stop(): Promise<void> {
         logger.info("Server shutting down");
-        await this.server.close();
+        if (this.server) {
+            await this.server.close();
+        }
     }
 
     private initControllers(): void {
@@ -64,6 +68,10 @@ export class App implements Service {
     }
 
     private addApiRoutes(): void {
+        if (!this.helpController) {
+            throw new Error("Help Controller not initialized.");
+        }
+
         this.express.use("/api", createApiRoutes(
             this.helpController,
         ));

@@ -10,6 +10,8 @@ before( () => {
 });
 
 after( () => {
-    app.server.close();
+    if (app.server) {
+        app.server.close();
+    }
     logger.silent = false;
 });
