@@ -55,7 +55,8 @@ class Database {
         return this.sequelize;
     }
 
-    private async waitForDb() {
+    private async waitForDb(): Promise<void> {
+        // eslint-disable-next-line no-constant-condition
         while (true) {
             try {
                 logger.info(`Connecting to database at ${config.db.host}:3306`);
@@ -70,7 +71,7 @@ class Database {
         }
     }
 
-    private async runMigrations() {
+    private async runMigrations(): Promise<void> {
         // Run migrations if not testing
         if (config.env !== "test") {
             logger.info("Running migrations...");
@@ -79,15 +80,13 @@ class Database {
         }
     }
 
-    private sleep(ms) {
-
-        // eslint-disable-next-line no-undef
+    private sleep(ms): Promise<void> {
         return new Promise((resolve) => {
             setTimeout(resolve, ms);
         });
     }
 
-    private initModels() {
+    private initModels(): void {
         Example.init({
             help: {
                 type: DataTypes.STRING(128),

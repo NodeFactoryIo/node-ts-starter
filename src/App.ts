@@ -1,5 +1,5 @@
 import bodyParser from "body-parser";
-import express = require("express");
+import express from "express";
 import {Express, Request, Response, Router} from "express";
 import helmet from "helmet";
 import http from "http";
@@ -8,10 +8,10 @@ import morgan from "morgan";
 import config from "./Config/Config";
 import {HelpController} from "./Controller/Api/HelpController";
 import {createApiRoutes} from "./Routes/Api";
-import {IService} from "./Services/interface";
+import {Service} from "./Services/interface";
 import logger, {morganLogger} from "./Services/Logger";
 
-export class App implements IService {
+export class App implements Service {
 
     public express: Express;
     public server: http.Server;
@@ -44,7 +44,7 @@ export class App implements IService {
         await this.server.close();
     }
 
-    private initControllers() {
+    private initControllers(): void {
         this.helpController = new HelpController();
     }
 
@@ -63,7 +63,7 @@ export class App implements IService {
         this.express.use("/", router);
     }
 
-    private addApiRoutes() {
+    private addApiRoutes(): void {
         this.express.use("/api", createApiRoutes(
             this.helpController,
         ));

@@ -1,5 +1,4 @@
-export interface IService {
-
-    start(): Promise<any>;
+export interface Service {
+    start(): Promise<void>;
     stop(): Promise<void>;
 }
