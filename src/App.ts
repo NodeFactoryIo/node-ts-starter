@@ -1,6 +1,6 @@
 import bodyParser from "body-parser";
 import express from "express";
-import {Application, Request, Response, Router} from "express";
+import {Application, Request, Response, Router, RequestHandler} from "express";
 import helmet from "helmet";
 import http from "http";
 import morgan from "morgan";
@@ -21,11 +21,9 @@ export class App implements Service {
     constructor() {
         this.express = express();
         // add before route middleware's here
-        // @ts-ignore-next-line
-        this.express.use(morgan("short", {stream: morganLogger}));
+        this.express.use(morgan("short", {stream: morganLogger}) as RequestHandler);
         this.express.use(bodyParser.json());
-        // @ts-ignore-next-line
-        this.express.use(helmet());
+        this.express.use(helmet() as RequestHandler);
         // add after route middleware's here
         this.addInitialRoutes();
     }
