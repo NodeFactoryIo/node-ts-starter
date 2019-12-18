@@ -1,6 +1,7 @@
 import path from "path";
 import {DataTypes, InitOptions, ModelAttributes, Options, Sequelize} from "sequelize";
 import Umzug from "umzug";
+import { Umzug as UmzugInterface } from "umzug";
 import config from "../Config/Config";
 import Example from "../Models/Example";
 import logger from "../Services/Logger";
@@ -9,7 +10,7 @@ class Database {
 
     public sequelize: Sequelize;
 
-    private migrations: Umzug;
+    private migrations: UmzugInterface;
 
     constructor() {
         this.sequelize = new Sequelize(
@@ -55,7 +56,8 @@ class Database {
         return this.sequelize;
     }
 
-    private async waitForDb() {
+    private async waitForDb(): Promise<void> {
+        // eslint-disable-next-line no-constant-condition
         while (true) {
             try {
                 logger.info(`Connecting to database at ${config.db.host}:3306`);
@@ -70,7 +72,7 @@ class Database {
         }
     }
 
-    private async runMigrations() {
+    private async runMigrations(): Promise<void> {
         // Run migrations if not testing
         if (config.env !== "test") {
             logger.info("Running migrations...");
@@ -79,15 +81,13 @@ class Database {
         }
     }
 
-    private sleep(ms) {
-
-        // eslint-disable-next-line no-undef
+    private sleep(ms: number): Promise<void> {
         return new Promise((resolve) => {
             setTimeout(resolve, ms);
         });
     }
 
-    private initModels() {
+    private initModels(): void {
         Example.init({
             help: {
                 type: DataTypes.STRING(128),

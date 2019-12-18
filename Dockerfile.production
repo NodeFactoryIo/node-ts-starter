@@ -2,7 +2,7 @@ FROM nodefactory/nodejs-ts-starter:latest
 
 RUN yarn run build
 
-FROM node:carbon-alpine
+FROM node:12.13-alpine
 
 WORKDIR /app
 

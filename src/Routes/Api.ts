@@ -8,7 +8,7 @@ export function createApiRoutes(
 
     router.get(
         "/help",
-        // validate(schema)
+        // validate(schema) // express-validation
         helpController.getHelp.bind(helpController));
 
     return router;
